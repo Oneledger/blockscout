@@ -91,25 +91,24 @@ defmodule BlockScoutWeb.ChainController do
         redirect_search_results(conn, item)
 
       {:error, :not_found} ->
-        not_found(conn)
+        redirect(conn, to: search_path(conn, :search_results, q: query))
     end
   end
 
   def search(conn, _), do: not_found(conn)
 
   def token_autocomplete(conn, %{"q" => term}) when is_binary(term) do
-    result_tokens = Chain.search_token(term)
-    result_contracts = Chain.search_contract(term)
-    result_transactions = Chain.search_tx(term)
-    result_addresses = Chain.search_address(term)
-    result_blocks = Chain.search_block(term)
-    result = result_tokens ++ result_contracts ++ result_transactions ++ result_addresses ++ result_blocks
+    result = search_by(term)
 
     json(conn, result)
   end
 
   def token_autocomplete(conn, _) do
     json(conn, "{}")
+  end
+
+  def search_by(term) do
+    Chain.joint_search(term)
   end
 
   def chain_blocks(conn, _params) do
