@@ -191,16 +191,15 @@ defmodule BlockScoutWeb.WebRouter do
         as: :token_transfers
       )
 
+
       resources("/tokens", AddressTokenController, only: [:index], as: :token) do
         resources(
           "/token-transfers",
           AddressTokenTransferController,
           only: [:index],
           as: :transfers
-        )
-      end
-
-      get("/token/:address", AddressTokenController, :show_token)
+          )
+        end
 
       resources(
         "/token-balances",
@@ -381,6 +380,8 @@ defmodule BlockScoutWeb.WebRouter do
         )
       end
     end
+
+    get("/token/:id", Tokens.TokenController, :show_token)
 
     resources(
       "/smart-contracts",

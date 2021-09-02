@@ -52,4 +52,8 @@ defmodule BlockScoutWeb.Tokens.TokenController do
     end)
     |> List.to_tuple()
   end
+
+  def show_token(conn, params) do
+    show(conn, params)
+  end
 end

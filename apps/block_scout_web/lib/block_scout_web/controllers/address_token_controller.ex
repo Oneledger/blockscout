@@ -87,8 +87,4 @@ defmodule BlockScoutWeb.AddressTokenController do
         not_found(conn)
     end
   end
-
-  def show_token(conn, params) do
-    index(conn, params)
-  end
 end
