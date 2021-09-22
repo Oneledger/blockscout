@@ -210,6 +210,12 @@
         <%= nil %>
     <% end %>
     <div class="layout-container">
+      <% show_olt_address_alert = Application.get_env(:block_scout_web, BlockScoutWeb.Chain)[:show_olt_address_alert] %>
+      <%= if show_olt_address_alert do %>
+        <div class="alert alert-info text-center mb-0 p-3" data-selector="indexed-status">
+          <%= raw System.get_env("OLT_ADDRESS_ALERT_MESSAGE") %>
+        </div>
+      <% end %>
       <% show_maintenance_alert = Application.get_env(:block_scout_web, BlockScoutWeb.Chain)[:show_maintenance_alert] %>
       <%= if show_maintenance_alert do %>
         <div class="alert alert-warning text-center mb-0 p-3" data-selector="indexed-status">
